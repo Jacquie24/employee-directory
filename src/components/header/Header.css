@@ -1,0 +1,16 @@
+
+.jumbotron {
+    background-color: rgb(6, 6, 44);
+    color: white;
+    text-align: center;
+    position: relative;
+
+}
+
+.push-to-bottom {
+    position: bottom;
+    width: 100%;
+    height: 15px;
+    background-color: red;
+}
+
