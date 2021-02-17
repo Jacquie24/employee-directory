@@ -1,26 +1,58 @@
 import React, { Component } from 'react';
+import axios from "axios";
+import EmployeesRow from "./EmployeesRow";
 
 class Employees extends Component {
     state = {
         employees: [
-            {
-                image: <img src="https://www.placecage.com/50/50" alt="Nic Cage"></img>,
-                name: "Nicolas Cage",
-                phone: "(303) 410-9936",
-                email: "nic@niciscool.com",
-                DOB: "12-12-1966"
-
-            },
-            {
-                image: <img src="http://placekitten.com/g/50/50" alt="Cool Cat"></img>,
-                name: "Cool Cat",
-                phone: "(303) 410-9937",
-                email: "cat@catiscool.com",
-                DOB: "09-20-1988"
-
-            },
         ]
     }
+
+    componentDidMount() {
+        axios.get("https://randomuser.me/api/?results=25&nat=us")
+      .then((response) => {
+        console.log(response.data.results);
+            this.setState({
+              employees: response.data.results,
+            });
+            this.nameSort();
+          })
+          .catch((err) => console.log(err));
+      }
+
+    
+      // Changes state when an input change occurs
+      handleInputChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+          [name]: value,
+        });
+        // console.log(Object.keys(response.data.results));
+        // setBreeds(Object.keys(response.data.message));
+      }
+
+      nameSort = () => {
+          const sortedArray = this.state.employees.sort(function (a,b) {
+            var nameA = a.name.last.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.last.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+          
+            // names must be equal
+            return 0;
+          });
+
+          this.setState({
+              employees: sortedArray
+          })
+
+      }
+
+    
     render() {
         return (
                 <div className="container">
@@ -34,19 +66,8 @@ class Employees extends Component {
       <th scope="col">DOB</th>
     </tr>
   </thead>
-  <tbody>
-      {this.state.employees.map((employee) => (
-    <tr>
-    <td>{employee.image}</td>
-    <td>{employee.name}</td>
-    <td>{employee.phone}</td>
-    <td>{employee.email}</td>
-    <td>{employee.DOB}</td>
-  </tr>          
-      ))}
+      <EmployeesRow employees={this.state.employees}/>
 
-
-  </tbody>
 </table>
             </div>
         );
