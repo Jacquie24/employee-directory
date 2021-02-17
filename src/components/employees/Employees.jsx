@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import EmployeesRow from "./EmployeesRow";
+import SearchBar from "../SearchBar/SearchBar"
 
 class Employees extends Component {
     state = {
@@ -52,13 +53,16 @@ class Employees extends Component {
 
       }
 
-      
+      searchEmp = () => {
+        //   const searchArray = this.state.employees.filter(function ()
+        console.log("Button clicked");
+      }
 
     
     render() {
         return (
                 <div className="container">
-                <table className="table">
+                <table className="table mt-5">
   <thead>
     <tr>
       <th scope="col">Image</th>
