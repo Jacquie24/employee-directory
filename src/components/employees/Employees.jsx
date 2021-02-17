@@ -27,8 +27,6 @@ class Employees extends Component {
         this.setState({
           [name]: value,
         });
-        // console.log(Object.keys(response.data.results));
-        // setBreeds(Object.keys(response.data.message));
       }
 
       nameSort = () => {
