@@ -5,7 +5,8 @@ import EmployeesRow from "./EmployeesRow";
 class Employees extends Component {
     state = {
         employees: [
-        ]
+        ],
+        filterEmployees: []
     }
 
     componentDidMount() {
@@ -14,8 +15,9 @@ class Employees extends Component {
         console.log(response.data.results);
             this.setState({
               employees: response.data.results,
+              filterEmployees: response.data.results
             });
-            this.nameSort();
+            // this.nameSort();
           })
           .catch((err) => console.log(err));
       }
@@ -45,10 +47,12 @@ class Employees extends Component {
           });
 
           this.setState({
-              employees: sortedArray
+              filterEmployees: sortedArray
           })
 
       }
+
+      
 
     
     render() {
@@ -58,13 +62,13 @@ class Employees extends Component {
   <thead>
     <tr>
       <th scope="col">Image</th>
-      <th scope="col">Name</th>
+      <th scope="col">Name<i className="fa fa-arrow-circle-down" aria-hidden="true" onClick={this.nameSort}></i></th>
       <th scope="col">Phone</th>
       <th scope="col">Email</th>
       <th scope="col">DOB</th>
     </tr>
   </thead>
-      <EmployeesRow employees={this.state.employees}/>
+      <EmployeesRow employees={this.state.filterEmployees}/>
 
 </table>
             </div>
