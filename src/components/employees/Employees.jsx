@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import EmployeesRow from "./EmployeesRow";
-import SearchBar from "../SearchBar/SearchBar"
+import SearchBar from "../SearchBar/SearchBar";
 
 class Employees extends Component {
     state = {
@@ -53,15 +53,28 @@ class Employees extends Component {
 
       }
 
-      searchEmp = () => {
-        //   const searchArray = this.state.employees.filter(function ()
-        console.log("Button clicked");
+      searchEmp = (e) => {
+            const searchString = e.target.value.toLowerCase();
+            const searchArray = this.state.employees.filter(employee => {
+              return (
+                employee.name.first.toLowerCase().includes(searchString) ||
+                employee.name.last.toLowerCase().includes(searchString)
+              );
+            });
+            console.log(searchString);
+            console.log(searchArray);
+            this.setState({
+                filterEmployees: searchArray
+            })
+// What goes here??? .map over searchArray?
       }
 
     
     render() {
         return (
                 <div className="container">
+<SearchBar handleChange={this.searchEmp}/>
+
                 <table className="table mt-5">
   <thead>
     <tr>

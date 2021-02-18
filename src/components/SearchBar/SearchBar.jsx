@@ -8,8 +8,8 @@ const SearchBar = (props) => {
             <div className="col-sm-4"></div>
             <div className="col-sm-4">
            <form>
-      <input className="form-control mr-sm-2" type="search" placeholder="Name" aria-label="Search"></input>
-      <button className="btn my-2 my-sm-2 mb-2" type="submit" onSubmit={props.change}>Search</button>
+      <input className="form-control mr-sm-2" type="search" placeholder="Name" onChange={props.handleChange} aria-label="Search"></input>
+      <button className="btn my-2 my-sm-2 mb-2" type="submit">Search</button>
     </form> 
         </div>
         </div>
